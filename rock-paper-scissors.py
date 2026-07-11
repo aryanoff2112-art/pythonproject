@@ -1,4 +1,7 @@
 import random
+print("=" * 40)
+print("     ROCK PAPER SCISSORS")
+print("=" * 40)
 
 user_score = 0
 computer_score = 0  
