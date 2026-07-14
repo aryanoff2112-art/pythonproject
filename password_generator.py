@@ -1,5 +1,7 @@
 import random
 import string
+from colorama import Fore
+
 
 print("=" * 40)
 print("          PASSWORD GENERATOR")
@@ -46,7 +48,33 @@ def password_generator(min_length, max_length, use_uppercase=True, use_digits=Tr
         if use_special_chars and not has_special_char:
             meets_criteria = False
     
+    password_list = list(password)
+    random.shuffle(password_list)
+    password = "".join(password_list)
     return password
+
+def check_password_strength(password):
+    score = 0
+
+    if len(password) >= 8:
+        score += 1
+    if len(password) >= 12:
+        score += 1    
+    if any(char.islower() for char in password):
+        score += 1
+    if any(char.isupper() for char in password):
+        score += 1
+    if any(char.isdigit() for char in password):
+        score += 1
+    if any(char in string.punctuation for char in password):
+        score += 1
+
+    if score <= 2:
+        print(Fore.RED + "Weak Password")
+    elif score == 3 or score == 4:
+        print(Fore.YELLOW + "Medium Password")
+    else:
+        print(Fore.GREEN + "Strong Password")
 while True:
     min_length = int(input("Enter the minimum length of the password: "))
     max_length = int(input("Enter the maximum length of the password: "))
@@ -61,6 +89,7 @@ while True:
 
     password = password_generator(min_length=min_length,max_length=max_length, use_uppercase=use_uppercase, use_digits=use_digits, use_special_chars=use_special_chars)
     print("Generated Password:", password)
+    check_password_strength(password)
     again = input("\nDo you want to generate another password? (yes/no): ").lower()
 
     if again != "yes":
