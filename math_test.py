@@ -23,22 +23,29 @@ print("2. Medium")
 print("3. Hard")
 
 while True:
-    difficulty = input("Enter your choice (1-3): ")
+    difficulty = input("Enter your choice (1-4): ")
 
     if difficulty == "1":
         min_number = 1
-        max_number = 10
+        max_number = 20
         break
     elif difficulty == "2":
-        min_number = 10
+        min_number = 21
         max_number = 50
         break
     elif difficulty == "3":
         min_number = 50
         max_number = 100
         break
+    elif difficulty == "4":
+        min_number = 100
+        max_number = 200
+        break
+    elif difficulty.lower() == "exit":
+        print(Fore.CYAN + "Exiting the game. Goodbye!")
+        exit()
     else:
-        print(Fore.RED + "Invalid choice! Please enter 1, 2 or 3.")
+        print(Fore.RED + "Invalid choice! Please enter 1, 2, 3 or 4.")
 
 while True:
     try:
